@@ -1,5 +1,5 @@
 {
-  "name": "lab9",
+  "name": "sign-verify-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
