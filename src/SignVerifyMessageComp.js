@@ -26,13 +26,13 @@ class SignVerifyMessageComp extends React.Component {
 				if (typeof window.ethereum.selectedAddress === 'undefined') {
 					await window.ethereum.enable()
 				}
-				const provider = await new ethers.providers.Web3Provider(window.ethereum)
+				let provider = await new ethers.providers.Web3Provider(window.ethereum)
 				this.setState({signer: provider.getSigner()})
-				let abi = [
+				provider = ethers.getDefaultProvider('kovan')
+				const abi = [
     			'function verifyString(string, uint8, bytes32, bytes32) public pure returns (address)'
 				]
-				//contract address on kovan network
-				let contractAddress = '0x20c3e202c4f2fc6e250db20a8a7883f7255e5115'
+				const contractAddress = '0x20c3e202c4f2fc6e250db20a8a7883f7255e5115'
 				this.setState({contract: await new ethers.Contract(contractAddress, abi, provider)})
 			} catch (error) {
 				this.setState({hasErrored: true, errorMessage: 'You denied access to your metamask.'})
